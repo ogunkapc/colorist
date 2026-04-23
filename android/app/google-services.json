@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "889392669151",
+    "project_id": "colorist-90e31",
+    "storage_bucket": "colorist-90e31.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889392669151:android:5d132bc63452e43498646a",
+        "android_client_info": {
+          "package_name": "com.example.colorist"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWXDLvXv6t4wWjgDM2MMnRbj3-6MflLec"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
