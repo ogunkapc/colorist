@@ -1,20 +1,36 @@
+import 'package:colorist_ui/colorist_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-void main() {
-  runApp(const MainApp());
+void main() async {
+  runApp(ProviderScope(child: MainApp()));
 }
 
-class MainApp extends StatelessWidget {
+class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      ),
+      home: MainScreen(
+        sendMessage: (message) {
+          sendMessage(message, ref);
+        },
       ),
     );
+  }
+
+  // A fake LLM that just echoes back what it receives.
+  void sendMessage(String message, WidgetRef ref) {
+    final chatStateNotifier = ref.read(chatStateProvider.notifier);
+    final logStateNotifier = ref.read(logStateProvider.notifier);
+
+    chatStateNotifier.addUserMessage(message);
+    logStateNotifier.logUserText(message);
+    chatStateNotifier.addLlmMessage(message, MessageState.complete);
+    logStateNotifier.logLlmText(message);
   }
 }
