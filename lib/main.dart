@@ -1,11 +1,11 @@
-import 'package:colorist_ui/colorist_ui.dart';
+import 'package:colorist/screens/main_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'providers/gemini.dart';
-import 'services/gemini_chat_service.dart';
-
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(ProviderScope(child: MainApp()));
 }
 
@@ -14,21 +14,12 @@ class MainApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final model = ref.watch(geminiModelProvider);
-
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: model.when(
-        data: (data) => MainScreen(
-          sendMessage: (text) {
-            ref.read(geminiChatServiceProvider).sendMessage(text);
-          },
-        ),
-        loading: () => LoadingScreen(message: 'Initializing Gemini Model'),
-        error: (err, st) => ErrorScreen(error: err),
-      ),
+      home: MainPage(),
     );
   }
 }

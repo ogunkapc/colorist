@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 0.1.0+1
 
 environment:
-  sdk: ^3.11.1
+  sdk: ^3.10.4
 
 dependencies:
   flutter:
@@ -12,8 +12,9 @@ dependencies:
   colorist_ui: ^0.4.0
   flutter_riverpod: ^3.3.1
   riverpod_annotation: ^4.0.2
-  firebase_core: ^4.7.0
+  firebase_core: ^4.9.0
   firebase_ai: ^3.11.0
+  firebase_messaging: ^16.2.2
 
 dev_dependencies:
   flutter_test:

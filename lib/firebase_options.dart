@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'colorist-90e31.firebasestorage.app',
     measurementId: 'G-45J7FN1SPW',
   );
+
 }
