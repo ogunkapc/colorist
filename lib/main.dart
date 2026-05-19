@@ -1,6 +1,7 @@
 import 'package:colorist/core/router/app_routes.dart';
-import 'package:colorist/screens/main_page.dart';
-import 'package:colorist/services/firebase_api.dart';
+import 'package:colorist/firebase_options.dart';
+import 'package:colorist/screens/ai_chat_screen.dart';
+import 'package:colorist/services/firebase_notification_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -9,8 +10,9 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  FirebaseApi().initNotifications();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await FirebaseNotificationService.instance.initializeFCM();
   runApp(ProviderScope(child: MainApp()));
 }
 
@@ -24,7 +26,7 @@ class MainApp extends ConsumerWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: MainPage(),
+      home: AIChatScreen(),
       navigatorKey: navigatorKey,
       onGenerateRoute: routeGenerator,
     );
